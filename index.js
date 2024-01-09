@@ -33,7 +33,7 @@ let items = [
 app.get("/", async (req, res) => {
   const result = await db.query("SELECT * FROM items");
   items = result.rows
-  console.log(items);
+  // console.log(items);
   res.render("index.ejs", {
     listTitle: "Today",
     listItems: items,
@@ -42,7 +42,7 @@ app.get("/", async (req, res) => {
 
 app.post("/add", async (req, res) => {
   const item = req.body.newItem;
-  console.log(item);
+  // console.log(item);
   await db.query("INSERT INTO items (title) VALUES ($1)",[item])
   // items.push({ title: item });
   res.redirect("/");
@@ -50,14 +50,14 @@ app.post("/add", async (req, res) => {
 
 app.post("/edit", async (req, res) => {
   const getEdit = req.body;
-  console.log(getEdit);
+  // console.log(getEdit);
   await db.query("UPDATE items SET title = $1 WHERE items.id = $2",[getEdit.updatedItemTitle,getEdit.updatedItemId]);
   res.redirect("/")
 });
 
 app.post("/delete", async (req, res) => {
   const getDelete = req.body.deleteItemId;
-  console.log(getDelete);
+  // console.log(getDelete);
   await db.query("DELETE FROM items WHERE items.id = $1",[getDelete]);
   res.redirect("/")
 });
