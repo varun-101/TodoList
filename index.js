@@ -6,20 +6,20 @@ import pg from "pg";
 const app = express();
 const port = process.env.PORT;
 
-const db = new pg.Client({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DATABASE_PASSWORD,
-  port: process.env.PORT || 5432,
-  ssl: {
-    rejectUnauthorized: false, // This is just for demonstration; use a CA certificate in production
-  },
-});
-
 // const db = new pg.Client({
-//   connectionString: process.env.CONNECTION_STRING
-// })
+//   user: process.env.DB_USER,
+//   host: process.env.DB_HOST,
+//   database: process.env.DB_NAME,
+//   password: process.env.DATABASE_PASSWORD,
+//   port: process.env.PORT || 5432,
+//   ssl: {
+//     rejectUnauthorized: false, // This is just for demonstration; use a CA certificate in production
+//   },
+// });
+
+const db = new pg.Client({
+  connectionString: process.env.CONNECTION_STRING
+})
 db.connect();
 
 app.use(bodyParser.urlencoded({ extended: true }));
